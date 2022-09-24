@@ -1,0 +1,54 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+:root {
+  --colour-primary-1: #fffbeb;
+  --colour-primary-2: #fcd34d;
+  --colour-primary-3: #fbbf24;
+  --colour-primary-4: #f59e0b;
+
+  --colour-secondary-1: #e6e6e6;
+  --colour-secondary-2: #bfbfbf;
+  --colour-secondary-3: #999999;
+  --colour-secondary-4: #4d4d4d;
+
+  --colour-dark-1: #495057;
+  --colour-dark-2: #343a40;
+  --colour-dark-3: #212529;
+
+  --colour-white-1: #fff;
+  --colour-white-2: #f8f9fa;
+  --colour-white-3: #e9ecef;
+  --border-radius: 0.5rem;
+  --font-size-1: 1.6rem;
+  --font-size-2: 1.8rem;
+  --font-size-3: 2.4rem;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 70%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  box-sizing: border-box;
+  background-color: var(--colour-dark-3);
+  position: relative;
+}

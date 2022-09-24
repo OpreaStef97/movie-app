@@ -1,0 +1,7 @@
+.movies_grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  grid-gap: 2rem;
+  padding: 2rem;
+}
