@@ -5,12 +5,14 @@ import {
 } from "redux";
 
 import thunkMiddleware from "redux-thunk";
+import favoritesReducer from "./favoritesReducer";
+import featuresReducer from "./featuresReducer/featuresReducer";
 import moviesReducer from "./moviesReducer";
-import statusReducer from "./statusReducer";
 
 const rootReducer = combineReducers({
   movies: moviesReducer,
-  status: statusReducer,
+  features: featuresReducer,
+  favorites: favoritesReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

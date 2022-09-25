@@ -1,32 +1,85 @@
-import MoviesGrid from "./MoviesGrid";
+import React, { Fragment, Suspense, useEffect } from "react";
+import { useRequest } from "../../hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { Fragment, useEffect } from "react";
-import { fetchMovies } from "../../store/moviesReducer";
-import { LoadingSpinner } from "../ui-components";
+import { CLEAR_MOVIES, FETCH_MOVIES } from "../../store/moviesReducer";
+import { useInfiniteScroll } from "../../hooks";
+import { INCREASE_PAGE } from "../../store/featuresReducer/featuresReducer";
+import { ViewStateIndicator } from "../ui-components";
+
+const MoviesGrid = React.lazy(() => import("./MoviesGrid"));
 
 const MoviesContent = () => {
-  const { movies, status } = useSelector((state) => state);
-
+  const { data, loading, error, hasMore, fetchData } = useRequest();
   const dispatch = useDispatch();
 
-  console.log({ movies, status });
+  const {
+    features: { featureType, showFavorites },
+    favorites,
+    movies,
+  } = useSelector((state) => state);
+
+  const results = data?.results;
 
   useEffect(() => {
-    dispatch(fetchMovies());
-  }, [dispatch]);
+    if (!results) {
+      return;
+    }
+    dispatch({ type: FETCH_MOVIES, payload: results });
+  }, [results, dispatch]);
 
-  if (status.loading) {
-    return <LoadingSpinner />;
+  const { queryString } = useSelector((state) => state.features);
+
+  useEffect(() => {
+    fetchData(queryString);
+  }, [fetchData, queryString]);
+
+  useEffect(() => {
+    // Clear movies when feature type changes
+    dispatch({ type: CLEAR_MOVIES });
+  }, [dispatch, error, featureType]);
+
+  const lastItemRef = useInfiniteScroll({
+    isLoading: loading,
+    hasMore,
+    onLoadMore: () => {
+      // Increase page number on scroll
+      dispatch({ type: INCREASE_PAGE });
+    },
+  });
+
+  if (!movies.length && loading) {
+    // to avoid flickering
+    return <ViewStateIndicator loading />;
   }
 
-  if (status.error) {
-    return <p>{status.error}</p>;
+  if (error) {
+    return <ViewStateIndicator error={error} />;
   }
 
   return (
-    <Fragment>
-      <MoviesGrid movies={movies.movies} />
-    </Fragment>
+    <>
+      {showFavorites ? (
+        <>
+          {favorites.length ? (
+            <Suspense fallback={<ViewStateIndicator loading />}>
+              <MoviesGrid movies={favorites} />
+            </Suspense>
+          ) : (
+            <ViewStateIndicator warning={"No favorites yet"} />
+          )}
+        </>
+      ) : (
+        <>
+          {results?.length ? (
+            <Suspense fallback={<ViewStateIndicator loading />}>
+              <MoviesGrid movies={movies} ref={lastItemRef} />
+            </Suspense>
+          ) : (
+            <ViewStateIndicator warning={"No movies found"} />
+          )}
+        </>
+      )}
+    </>
   );
 };
 

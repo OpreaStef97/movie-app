@@ -1,0 +1,75 @@
+/* inspired from solution of slide buttons from codepen.io */
+
+.switch_button {
+  background: var(--colour-dark-3);
+  opacity: 0.9;
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 20rem;
+  text-align: center;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  color: var(--colour-white-1);
+  position: relative;
+  padding-right: 10rem;
+  position: relative;
+  border: 1px solid var(--colour-white-3);
+  box-shadow: 0 0 3px 0.5px rgba(0, 0, 0, 0.5);
+}
+.switch_button:before {
+  content: "Favorites";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+.switch_button_checkbox {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+}
+.switch_button_checkbox:checked + .switch_button_label:before {
+  transform: translateX(10rem);
+  transition: transform 0.2s linear;
+}
+.switch_button_checkbox + .switch_button_label {
+  position: relative;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+}
+.switch_button_checkbox + .switch_button_label span {
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+}
+.switch_button_checkbox + .switch_button_label:before {
+  content: "";
+  background: var(--colour-primary-5);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 0.9rem;
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+.switch_button_checkbox + .switch_button_label .switch_button_label span {
+  position: relative;
+}

@@ -11,6 +11,8 @@
   --colour-primary-2: #fcd34d;
   --colour-primary-3: #fbbf24;
   --colour-primary-4: #f59e0b;
+  --colour-primary-5: #d97706;
+  --colour-primary-6: #fef3c5;
 
   --colour-secondary-1: #e6e6e6;
   --colour-secondary-2: #bfbfbf;
@@ -50,5 +52,38 @@ body {
   font-family: "Rubik", sans-serif;
   box-sizing: border-box;
   background-color: var(--colour-dark-3);
+  overflow-y: overlay;
   position: relative;
+}
+
+@supports not (overflow-y: overlay) {
+  body {
+      overflow-y: auto;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.75em;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--colour-dark-3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--colour-secondary-3);
+  border: 0.1em solid var(--colour-dark-2);
+  border-radius: 1em;
+  min-height: 5em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--colour-secondary-2);
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: var(--colour-secondary-3) var(--colour-dark-2);
+    scrollbar-width: auto;
+  }
 }

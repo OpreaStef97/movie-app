@@ -1,6 +1,6 @@
-import { FeaturesBar } from "./components/features";
+import { FeaturesBar, Search } from "./components/features";
 import MoviesContent from "./components/movies/MoviesContent";
-import Search from "./components/search/Search";
+
 import { Layout } from "./components/ui-components";
 
 const App = () => (

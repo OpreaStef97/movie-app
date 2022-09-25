@@ -1,0 +1,200 @@
+.select_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.select_label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.select {
+  position: relative;
+  border: 1px solid var(--colour-white-3);
+  border-radius: 1rem;
+  width: 20rem;
+}
+
+.select_indicator {
+  z-index: 100;
+  border-radius: 1rem;
+  height: 3rem;
+  position: relative;
+  background-color: var(--colour-dark-3);
+  max-width: 20rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.select_value {
+  cursor: pointer;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.select_value p {
+  padding: 1rem;
+  min-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.4rem;
+  color: var(--colour-white-1);
+}
+
+.select_open {
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 3rem;
+  background-color: var(--colour-primary-5);
+  border: none;
+  position: relative;
+  transition: all 0.2s;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.select_delete {
+  flex-shrink: 0;
+  flex-basis: 15%;
+  cursor: pointer;
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select_delete_icon {
+  color: var(--colour-primary-5);
+  height: 2.5rem;
+  width: 2.5rem;
+  transition: all 0.1s;
+}
+
+.select_icon {
+  color: var(--colour-white-1);
+  height: 2rem;
+  width: 2rem;
+  transition: all 0.2s;
+}
+
+.select_dropdown {
+  z-index: 200;
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: all 0.3s;
+  pointer-events: none;
+  border-radius: 1rem;
+}
+
+.select_list {
+  max-height: 0rem;
+  background-color: var(--colour-dark-3);
+  border-radius: 1rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: hidden;
+  transition: all 0.3s;
+  box-shadow: 0 0 5rem rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--colour-white-3);
+}
+
+.select_list::-webkit-scrollbar {
+  width: 1.2em;
+}
+.select_list::-webkit-scrollbar-track {
+  background: var(--colour-white-3);
+  border-radius: 50rem;
+}
+
+.select_list::-webkit-scrollbar-thumb {
+  background: var(--colour-primary-5);
+  border: 0.25em solid var(--colour-white-3);
+  border-radius: 50rem;
+}
+
+.select_list::-webkit-scrollbar-thumb:hover {
+  background: var(--colour-primary-4);
+}
+
+@supports (scrollbar-color: red blue) {
+  .select_list::-webkit-scrollbar {
+    scrollbar-color: var(--colour-primary-5) var(--colour-primary-3);
+    scrollbar-width: auto;
+  }
+}
+
+.select_option {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 3.5rem;
+  opacity: 0;
+  width: 100%;
+  border-top: 1px solid var(--colour-primary-1);
+  transition: all 0.25s;
+}
+
+.select_option:first-child {
+  border-top: none;
+}
+
+.select_option span {
+  font-size: 1.2rem;
+  color: var(--colour-primary-1);
+}
+
+.selected {
+  background-color: var(--colour-primary-5);
+  color: var(--colour-white-1);
+}
+
+.active .select_dropdown {
+  opacity: 1;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+  pointer-events: all;
+}
+
+.active .select_list {
+  max-height: 20rem;
+  overflow-y: overlay;
+  animation: hide-scroll 0.3s;
+}
+
+.active .select_option {
+  opacity: 1;
+}
+
+.active .select_icon {
+  transform: rotate(-180deg);
+}
+
+@keyframes hide-scroll {
+  from,
+  to {
+    overflow: hidden;
+  }
+}
