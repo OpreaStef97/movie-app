@@ -5,6 +5,8 @@ import MovieInfo from "../MovieInfo";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_FAVORITE, REMOVE_FAVORITE } from "../../../store/favoritesReducer";
+import { useImageLoad } from "../../../hooks";
+import { ViewStateIndicator } from "../../ui-components";
 
 const checkIfFavorite = (favorites, movie) => {
   return favorites.some((favorite) => favorite.id === movie.id);
@@ -38,9 +40,17 @@ const MovieItem = React.forwardRef(({ movie }, ref) => {
     ? `https://image.tmdb.org/t/p/w500/${poster_path}`
     : "placeholder.png";
 
+  const srcLoaded = useImageLoad(posterUrl);
+
   return (
     <div className={classes.movie_item} ref={ref}>
-      <img className={classes.movie_image} src={posterUrl} alt={title} />
+      {srcLoaded ? (
+        <img className={classes.movie_image} src={srcLoaded} alt={title} />
+      ) : (
+        <div className={classes.image_fallback}>
+          <ViewStateIndicator loading loadingType={"medium"}/>
+        </div>
+      )}
       <button onClick={handleExpandInfo} className={classes.info_button}>
         {expandInfo ? <XCircle /> : <Info />}
       </button>

@@ -25,15 +25,25 @@
 }
 
 .movie_info h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: var(--colour-primary-4);
     margin-bottom: 2rem;
 }
 
 .movie_info p {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 400;
     color: var(--colour-primary-4);
     margin-bottom: 2rem;
 }
+
+@media screen and (min-width: 768px) {
+    .movie_info h2 {
+        font-size: 2.5rem;
+    }
+    .movie_info p {
+        font-size: 1.8rem;
+    }
+}
+    

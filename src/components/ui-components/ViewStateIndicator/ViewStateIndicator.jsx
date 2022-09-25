@@ -2,14 +2,14 @@ import { SmileyXEyes, WarningCircle } from "phosphor-react";
 import LoadingSpinner from "../LoadingSpinner";
 import classes from "./ViewStateIndicator.module.css";
 
-const ViewStateIndicator = ({ loading, error, warning }) => {
+const ViewStateIndicator = ({ loading, error, warning, loadingType }) => {
   if (error && warning)
     console.warn(
       "ViewStateIndicator: Both error and warning props are set. Error will be displayed."
     );
 
   if (loading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner type={loadingType} />;
   }
 
   return (
