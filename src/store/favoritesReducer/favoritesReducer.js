@@ -1,12 +1,10 @@
-import { setLocalStorage } from "../../utils";
+import { getInitialLocalStorageState, setLocalStorage } from "../../utils";
 
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const CLEAR_FAVORITES = "CLEAR_FAVORITES";
 
-const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
-
-const initialState = Array.isArray(favorites) ? favorites : [];
+const initialState = getInitialLocalStorageState("favorites", "array");
 
 export default function favoritesReducer(state = initialState, action) {
   switch (action.type) {

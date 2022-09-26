@@ -5,9 +5,7 @@ export const useImageLoad = (src) => {
   useEffect(() => {
     const img = new Image();
     img.src = src;
-    // setTimeout(() => {
-      img.onload = () => setSourceLoaded(src);
-    // }, 200);
+    img.onload = () => setSourceLoaded(src);
   }, [src]);
 
   return sourceLoaded;

@@ -6,6 +6,7 @@ import {
   SET_FILTER,
   SET_SHOW_FAVORITES,
 } from "../../../store/featuresReducer/featuresReducer";
+import { getInitialLocalStorageState } from "../../../utils";
 import { SwitchButton } from "../../ui-components";
 import Select from "../Select";
 
@@ -13,8 +14,11 @@ import classes from "./FeaturesBar.module.css";
 
 const FeaturesBar = () => {
   const [switchState, setSwitchState] = useState(() => {
-    const showFavorites = localStorage.getItem("showFavorites");
-    return showFavorites === "true" ? true : false;
+    const showFavorites = getInitialLocalStorageState(
+      "showFavorites",
+      "boolean"
+    );
+    return showFavorites;
   });
 
   const [sortOption, setSortOption] = useState(null);
