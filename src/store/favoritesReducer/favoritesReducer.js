@@ -4,7 +4,9 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 export const CLEAR_FAVORITES = "CLEAR_FAVORITES";
 
-const initialState = JSON.parse(localStorage.getItem("favorites")) ?? [];
+const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
+
+const initialState = Array.isArray(favorites) ? favorites : [];
 
 export default function favoritesReducer(state = initialState, action) {
   switch (action.type) {
